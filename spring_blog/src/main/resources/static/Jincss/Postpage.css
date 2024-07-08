@@ -43,8 +43,8 @@ body {
 }
 
 .like-button {
-    width: 30px;
-    height: 30px;
+    width: 20px; /* 작은 크기로 조정 */
+    height: 20px; /* 작은 크기로 조정 */
     margin-left: 10px; /* 좋아요 버튼과 숫자 사이의 간격을 조정 */
 }
 

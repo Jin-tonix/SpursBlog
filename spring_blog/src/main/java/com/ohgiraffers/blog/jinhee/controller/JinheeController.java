@@ -97,19 +97,21 @@ public class JinheeController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBlog(@PathVariable Long id, @RequestParam(name = "confirm", defaultValue = "false") boolean confirm, Model model) {
-        if (!confirm) {
-            BlogDTO blogDTO = jinheeService.getBlogById(id);
-            if (blogDTO == null) {
-                return "redirect:/jinhee/journey";
-            }
-            model.addAttribute("blogDTO", blogDTO);
-            return "jinhee/delete";
-        } else {
-            jinheeService.deleteBlogById(id);
+    public String showDeleteConfirmation(@PathVariable Long id, Model model) {
+        BlogDTO blogDTO = jinheeService.getBlogById(id);
+        if (blogDTO == null) {
             return "redirect:/jinhee/journey";
         }
+        model.addAttribute("blogDTO", blogDTO);
+        return "jinhee/delete";
     }
+
+    @PostMapping("/delete/{id}")
+    public String deleteBlog(@PathVariable Long id) {
+        jinheeService.deleteBlogById(id);
+        return "redirect:/jinhee/journey";
+    }
+
 
     @GetMapping("/journey")
     public String share(Model model) {

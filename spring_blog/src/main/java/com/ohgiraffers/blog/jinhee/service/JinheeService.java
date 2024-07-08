@@ -68,16 +68,6 @@ public class JinheeService {
     }
 
     @Transactional
-    public void saveBlog(BlogDTO blogDTO) {
-        JinheeBlog blog = jinheeRepository.findById(blogDTO.getId()).orElse(null);
-        if (blog != null) {
-            blog.setBlogTitle(blogDTO.getBlogTitle());
-            blog.setBlogContent(blogDTO.getBlogContent());
-            jinheeRepository.save(blog);
-        }
-    }
-
-    @Transactional
     public void updateBlog(BlogDTO blogDTO) {
         JinheeBlog blog = jinheeRepository.findById(blogDTO.getId()).orElse(null);
         if (blog != null) {
