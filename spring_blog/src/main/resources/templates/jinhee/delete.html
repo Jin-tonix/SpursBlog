@@ -7,19 +7,20 @@
 </head>
 <body>
 
-<div th:replace="Jinfragments/header :: headerFragment"></div>
+<div th:replace="~{Jinfragments/header :: headerFragment}"></div>
 
 <div class="container">
     <h2>Delete Blog</h2>
     <p>삭제하시겠습니까?</p>
-    <form th:action="@{/jinhee/delete/confirm/{id}(id=${blogDTO.id})}" method="get">
+    <form th:action="@{/jinhee/delete/{id}(id=${blogDTO.id})}" method="post">
         <input type="hidden" name="confirm" value="true">
-        <button type="submit" class="btn btn-danger">삭제</button>
+        <button type="submit" class="btn btn-danger">확인</button>
         <a href="/jinhee/journey">취소</a>
     </form>
+
 </div>
 
-<div th:replace="Jinfragments/footer :: footerFragment"></div>
+<div th:replace="~{Jinfragments/footer :: footerFragment}"></div>
 
 </body>
 </html>

@@ -4,30 +4,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (likeButton && likeCountElement) {
         likeButton.addEventListener("click", function() {
-            var blogId = likeButton.getAttribute("id");
+            var blogId = likeButton.getAttribute("data-id");
 
             if (!blogId) {
                 console.error("Blog ID is missing.");
                 return;
             }
 
-            var csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
-
-            fetch("/jinhee/postpage/" + blogId + "/likepost", {
+            fetch("/jinhee/postpage/" + blogId + "/like", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": csrfToken
-                },
-                body: JSON.stringify({ blogId: blogId })
+                    "Content-Type": "application/json"
+                }
             })
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Failed to like the blog.");
                     }
-                    return response.json();
-                })
-                .then(data => {
                     console.log("Blog liked successfully.");
                     var currentLikeCount = parseInt(likeCountElement.textContent);
                     likeCountElement.textContent = currentLikeCount + 1;
